@@ -25,6 +25,17 @@ MYString::MYString(const char* in)
 	}
 }
 
+MYString::MYString(const MYString & mstr)
+{
+	len = mstr.len;
+	cap = mstr.cap;
+	str = new char[cap];
+	for (int i = 0; i < len; i++)
+	{
+		str[i] = mstr.str[i];
+	}
+}
+
 int MYString::length()
 {
 	return len;
@@ -35,19 +46,18 @@ int MYString::capacity()
 	return cap;
 }
 
-char MYString::at(int index)
+char MYString::operator [] (int index)
 {
-	if ((index > cap) && (index >= 0))
-		return '\0';
 	char iChar = str[index];
 	return iChar;
 }
+
 char* MYString::c_str()
 {
 	return str;
 }
 
-void MYString::setEqualTo(const MYString& argStr)
+void MYString::operator = (const MYString& argStr)
 {
 	if (&argStr != this)
 	{
@@ -62,29 +72,19 @@ void MYString::setEqualTo(const MYString& argStr)
 	}
 }
 
-void MYString::write(std::ostream& ostr)
+std::ostream& operator <<(std::ostream& ostr, const MYString& outString)
 {
-	for (int i = 0; i < len; i++)
-		ostr << str[i];
+	//for (int i = 0; i < len; i++)
+		ostr << outString.str;
+		return ostr;
 }
 
-bool MYString::read(std::istream& istr)
+std::istream& operator >>(std::istream& istr, MYString& inString)
 {
 	char* readBuf = new char[100];
 	istr >> readBuf;
-	len = 0;
-	while (readBuf[len - 1] != '\0')
-	{
-		len++;
-	}
-	cap = ((len / 20) + 1) * 20;
-	str = new char[cap];
-	for (int i = 0; i < len; i++)
-	{
-		str[i] = readBuf[i];
-	}
-	delete readBuf;
-	return true;
+	inString = MYString(readBuf);
+	return istr;
 }
 
 int MYString::compareTo(const MYString& argStr)
@@ -99,6 +99,20 @@ int MYString::compareTo(const MYString& argStr)
 	}
 	return 0;
 }
+
+MYString MYString::operator +(const MYString &argStr)
+{
+	int newLen = len + argStr.len;
+	int tempCap = ((newLen / 20) + 1) * 20;
+	char* tempStr = new char[tempCap];
+	for (int i = 0; i < len; i++)
+		tempStr[i] = str[i];
+	for (int i = len-1; i < newLen; i++)
+		tempStr[i] = argStr.str[i-(len-1)];
+	MYString temp(tempStr);
+	return temp;
+}
+
 
 MYString::~MYString()
 {
