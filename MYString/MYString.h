@@ -42,7 +42,9 @@ public:
 	friend std::istream& operator >>(std::istream& istr, MYString& inString);
 	
 	//compares this string to the contents of another string. 
-	int MYString::compareTo(const MYString& argStr);
+	bool MYString::operator <(const MYString& argStr);
+	bool MYString::operator >(const MYString& argStr);
+	bool MYString::operator ==(const MYString& argStr);
 	
 	//destructor. cleans up after the function is no longer needed.
 	MYString MYString::operator +(const MYString &argStr);

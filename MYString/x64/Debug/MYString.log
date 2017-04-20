@@ -1,3 +1,4 @@
-﻿  MYString.cpp
-  MYString.vcxproj -> C:\Users\tgallen\Documents\Visual Studio 2015\Projects\MYStringV2\x64\Debug\MYString.exe
-  MYString.vcxproj -> C:\Users\tgallen\Documents\Visual Studio 2015\Projects\MYStringV2\x64\Debug\MYString.pdb (Full PDB)
+﻿  Program 2.cpp
+c:\users\thoom\documents\visual studio 2015\projects\mystringv2\mystring\program 2.cpp(45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  MYString.vcxproj -> C:\Users\thoom\Documents\Visual Studio 2015\Projects\mystringv2\x64\Debug\MYString.exe
+  MYString.vcxproj -> C:\Users\thoom\Documents\Visual Studio 2015\Projects\mystringv2\x64\Debug\MYString.pdb (Full PDB)

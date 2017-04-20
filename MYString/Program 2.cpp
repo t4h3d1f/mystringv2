@@ -2,10 +2,10 @@
 //Author: Thoomas Allen
 //Section: S
 //Program name: Program 3
-//Description: Reads in the contents of the file "infile2" and sorts the words
-//from smallest to largest based on their ascii value. displays the formatted 
-//output in blocks of 7 words. Only works with files containing 100 or less
-//words. Prints to a file called outfile.txt
+//Description: Reads in the contents of the entered by the user. Collects words
+//into groups of five words. Sorts groups by ascii value and displays result in 
+//ascending order. appends length of string and capacity to end of the string's 
+//console output.
 ////
 
 #include "stdafx.h"
@@ -17,71 +17,91 @@
 
 using namespace std;
 
-vector<MYString> strVec(100);
-
-
 int main()
 {
-	//ifstream inFile;
-	//inFile.open("infile2.txt");
-	//if (inFile.is_open())
-	//{
 
-	//	int index = 0;
-	//	while (!inFile.eof())
-	//	{
-	//		strVec[index].read(inFile);
-	//		index++;
-	//	}
-	//	inFile.close();
-	//	strVec.resize(index);
-	//}
-	//else
-	//{
-	//	cout << "Error reading file\n";
-	//	system("pause");
-	//	return 1;
-	//}
-	//for (int i = 0; i < strVec.size(); i++)
-	//{
-	//	for (int j = 1; j < strVec.size(); j++)
-	//	{
-	//		if (strVec[j - 1].compareTo(strVec[j]) > 0)
-	//		{
-	//			MYString tempStr = *new MYString;
-	//			tempStr = strVec[j];
-	//			strVec[j] = strVec[j - 1];
-	//			strVec[j - 1] = tempStr;
-	//		}
-	//	}
-	//}
-	//cout << setw(10);
-	//for (int i = 0; i < strVec.size(); i++)
-	//{
-	//	strVec[i].write(cout);
-	//	if ((i % 7 == 0) && (i != 0))
-	//		cout << endl;
-	//}
-	//cout << endl;
-	//ofstream outFile("outfile.txt");
-	//outFile << setw(10);
-	//for (int i = 0; i < strVec.size(); i++)
-	//{
-	//	strVec[i].write(outFile);
-	//	if ((i % 7 == 0) && (i != 0))
-	//		outFile << endl;
-	//}
-	//outFile << endl;
-	//outFile.close();
-	//system("pause");
-
-	MYString str1 ("first ");
-	MYString str2 ( "second");
-	MYString str3;
-	str3 = str1 + str2;
-	cout << "the result is: " << str3 << " \n";
-	cin >> str3;
-	cout << str3 << " \n";
+	vector<MYString> strVec;
+	cout << "Enter filename: \n";
+	MYString fileStr;
+	cin >> fileStr;
+	fstream fin;
+	fin.open(fileStr.c_str());
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			MYString tempStr;
+			fin >> tempStr;
+			strVec.push_back(tempStr);
+		}
+		fin.close();
+	}
+	else
+	{
+		cout << "\nInvalid filename\n";
+		system("pause");
+		return 1;
+	}
+	int vecLen = strVec.size() - 1;
+	int index = 0;
+	vector<MYString> compressedStr;
+	while (index < (vecLen - 5))
+	{
+		compressedStr.push_back(strVec[index] + strVec[index + 1] +
+			strVec[index + 2] + strVec[index + 3] + strVec[index + 4]);
+		index = index + 5;
+	}
+	switch ((vecLen - index) % 5)
+	{
+	case 1:
+	{
+		compressedStr.push_back(strVec[index] + strVec[index + 1]);
+		break;
+	}
+	case 2:
+	{
+		compressedStr.push_back(strVec[index] + strVec[index + 1] +
+			strVec[index + 2]);
+		break;
+	}
+	case 3:
+	{
+		compressedStr.push_back(strVec[index] + strVec[index + 1] +
+			strVec[index + 2] + strVec[index + 3]);
+		break;
+	}
+	case 4:
+	{
+		compressedStr.push_back(strVec[index] + strVec[index + 1] +
+			strVec[index + 2] + strVec[index + 3] + strVec[index + 4]);
+		break;
+	}
+	default:
+	{
+		compressedStr.push_back(strVec[index]);
+		break;
+	}
+	}
+	cout << "\n";
+	for (int i = 0; i < compressedStr.size(); i++)
+		cout << compressedStr[i] << "\n";
+	cout << "\n\n";
+	for (int i = 0; i < compressedStr.size(); i++)
+	{
+		for (int j = 1; j < compressedStr.size(); j++)
+		{
+			if (compressedStr[j - 1] > compressedStr[j])
+			{
+				MYString tempStr(compressedStr[j]);
+				compressedStr[j] = compressedStr[j - 1];
+				compressedStr[j - 1] = tempStr;
+			}
+		}
+	}
+	for (int i = 0; i < compressedStr.size(); i++)
+		cout << compressedStr[i] << "\t\t\t" << compressedStr[i].length() <<
+		":" << compressedStr[i].capacity() << "\n";
 	system("pause");
 }
+
 

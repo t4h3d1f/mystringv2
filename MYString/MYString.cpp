@@ -74,9 +74,8 @@ void MYString::operator = (const MYString& argStr)
 
 std::ostream& operator <<(std::ostream& ostr, const MYString& outString)
 {
-	//for (int i = 0; i < len; i++)
-		ostr << outString.str;
-		return ostr;
+	ostr << outString.str;
+	return ostr;
 }
 
 std::istream& operator >>(std::istream& istr, MYString& inString)
@@ -87,17 +86,53 @@ std::istream& operator >>(std::istream& istr, MYString& inString)
 	return istr;
 }
 
-int MYString::compareTo(const MYString& argStr)
+bool MYString::operator <(const MYString& argStr)
 {
 
 	int sumDiff = 0;
+	//if (!(len <= argStr.len))
+		//return false;
 	for (int i = 0; i < len; i++)
 	{
 		sumDiff = str[i] - argStr.str[i];
-		if (sumDiff != 0)
-			return sumDiff;
+		if (sumDiff < 0)
+			return true;
+		else if (sumDiff > 0)
+			return false;
 	}
-	return 0;
+	return false;
+}
+
+bool MYString::operator >(const MYString& argStr)
+{
+
+	int sumDiff = 0;
+//	if (!(len >= argStr.len))
+	//	return false;
+	for (int i = 0; i < len; i++)
+	{
+		sumDiff = str[i] - argStr.str[i];
+		if (sumDiff > 0)
+			return true;
+		else if (sumDiff < 0)
+			return false;
+	}
+	return false;
+}
+
+bool MYString::operator ==(const MYString& argStr)
+{
+
+	int sumDiff = 0;
+	if (len != argStr.len)
+		return false;
+	for (int i = 0; i < len; i++)
+	{
+		sumDiff = str[i] - argStr.str[i];
+		if ((sumDiff == 0) && (i == len))
+			return true;
+	}
+	return false;
 }
 
 MYString MYString::operator +(const MYString &argStr)
