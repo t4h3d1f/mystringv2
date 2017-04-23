@@ -78,7 +78,7 @@ std::ostream& operator <<(std::ostream& ostr, const MYString& outString)
 	return ostr;
 }
 
-std::istream& operator >>(std::istream& istr, MYString& inString)
+std::istream& operator >> (std::istream& istr, MYString& inString)
 {
 	char* readBuf = new char[100];
 	istr >> readBuf;
@@ -90,8 +90,6 @@ bool MYString::operator <(const MYString& argStr)
 {
 
 	int sumDiff = 0;
-	//if (!(len <= argStr.len))
-		//return false;
 	for (int i = 0; i < len; i++)
 	{
 		sumDiff = str[i] - argStr.str[i];
@@ -107,8 +105,6 @@ bool MYString::operator >(const MYString& argStr)
 {
 
 	int sumDiff = 0;
-//	if (!(len >= argStr.len))
-	//	return false;
 	for (int i = 0; i < len; i++)
 	{
 		sumDiff = str[i] - argStr.str[i];
@@ -142,8 +138,8 @@ MYString MYString::operator +(const MYString &argStr)
 	char* tempStr = new char[tempCap];
 	for (int i = 0; i < len; i++)
 		tempStr[i] = str[i];
-	for (int i = len-1; i < newLen; i++)
-		tempStr[i] = argStr.str[i-(len-1)];
+	for (int i = len - 1; i < newLen; i++)
+		tempStr[i] = argStr.str[i - (len - 1)];
 	MYString temp(tempStr);
 	return temp;
 }

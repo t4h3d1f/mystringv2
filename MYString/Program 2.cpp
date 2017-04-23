@@ -99,7 +99,7 @@ int main()
 		}
 	}
 	for (int i = 0; i < compressedStr.size(); i++)
-		cout << compressedStr[i] << "\t\t\t" << compressedStr[i].length() <<
+		cout << setw(35) << left << compressedStr[i] << compressedStr[i].length() <<
 		":" << compressedStr[i].capacity() << "\n";
 	system("pause");
 }
