@@ -36,23 +36,23 @@ MYString::MYString(const MYString & mstr)
 	}
 }
 
-int MYString::length()
+const int MYString::length()
 {
 	return len;
 };
 
-int MYString::capacity()
+const int MYString::capacity()
 {
 	return cap;
 }
 
-char MYString::operator [] (int index)
+const char MYString::operator [] (int index)
 {
 	char iChar = str[index];
 	return iChar;
 }
 
-char* MYString::c_str()
+const char* MYString::c_str()
 {
 	return str;
 }
@@ -86,7 +86,7 @@ std::istream& operator >> (std::istream& istr, MYString& inString)
 	return istr;
 }
 
-bool MYString::operator <(const MYString& argStr)
+const bool MYString::operator <(const MYString& argStr)
 {
 
 	int sumDiff = 0;
@@ -101,7 +101,7 @@ bool MYString::operator <(const MYString& argStr)
 	return false;
 }
 
-bool MYString::operator >(const MYString& argStr)
+const bool MYString::operator >(const MYString& argStr)
 {
 
 	int sumDiff = 0;
@@ -116,7 +116,7 @@ bool MYString::operator >(const MYString& argStr)
 	return false;
 }
 
-bool MYString::operator ==(const MYString& argStr)
+const bool MYString::operator ==(const MYString& argStr)
 {
 
 	int sumDiff = 0;

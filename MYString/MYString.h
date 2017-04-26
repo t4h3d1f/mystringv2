@@ -18,16 +18,16 @@ public:
 	MYString(const char*);
 
 	//returns the length of the string
-	int MYString::length();
+	const int MYString::length();
 
 	//returns the capacity of the string (increases in blocks of 20)
-	int MYString::capacity();
+	const int MYString::capacity();
 
 	//returns the character at the index location given
-	char MYString::operator [] (int index);
+	const char MYString::operator [] (int index);
 
 	//returns a pointer to the character array, works with cout
-	char* MYString::c_str();
+	const char* MYString::c_str();
 
 	//replace the contents of the string with the contents of the
 	//given string
@@ -43,12 +43,12 @@ public:
 
 	//returns true if the left string has a lower ascii value than the right
 	//string
-	bool MYString::operator <(const MYString& argStr);
+	const bool MYString::operator <(const MYString& argStr);
 	//returns true if the left string has a greater ascii value than the right
 	//string
-	bool MYString::operator >(const MYString& argStr);
+	const bool MYString::operator >(const MYString& argStr);
 	//returns true if the two strings are equal
-	bool MYString::operator ==(const MYString& argStr);
+	const bool MYString::operator ==(const MYString& argStr);
 
 	//appends the right string to the end of the left string.
 	MYString MYString::operator +(const MYString &argStr);
